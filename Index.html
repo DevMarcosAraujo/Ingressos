@@ -14,15 +14,10 @@
         <a href="conferir-ingresso.html" class="botao-conferir">Conferir Ingresso</a>
         <a href="login.html" class="botao-login">Login</a> <!-- Botão de Login -->
     </header>
-    
-    <section class="evento-info">
-        <h2>Sobre o Evento</h2>
-        <p>Data: 20 de Julho de 2025 | Local: Arena X</p>
-        <p>Venha curtir a melhor experiência ao vivo!</p>
-    </section>
-    
-    <section class="ingresso">
+    <conteiner class="conteiner"> 
+       <section class="ingresso">
         <h2>Compre seu Ingresso</h2>
+        
         <form id="compra-form" onsubmit="gerarQRCode(event)">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" required>
@@ -48,8 +43,9 @@
 
             <button type="submit">Gerar QR Code para Pagamento</button>
         </form>
-    </section>
-    
+       
+        </section>
+    </conteiner>
     <script src="script.js"></script>
 </body>
 </html>

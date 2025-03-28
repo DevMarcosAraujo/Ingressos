@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferir Ingresso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: #fff;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .container h1 {
+            color: #333;
+        }
+        .container p {
+            font-size: 16px;
+            color: #555;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+        .resultado {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Conferir Ingresso</h1>
+        <p>Digite o código do ingresso abaixo para validar:</p>
+
+        <!-- Campo para digitar o código do ingresso -->
+        <input type="text" id="codigoIngresso" placeholder="Digite o código do ingresso">
+
+        <!-- Botão para validar -->
+        <button onclick="validarIngresso()">Validar Ingresso</button>
+
+        <!-- Mensagem de erro -->
+        <p id="resultado" class="resultado">Código inválido ou ingresso não encontrado.</p>
+
+        <!-- Mensagem de sucesso -->
+        <p id="sucesso" style="color: green; display: none;">Ingresso válido! Você pode entrar no evento.</p>
+
+        <!-- Botão de voltar para a página de vendas -->
+        <button onclick="voltarPagina()">Voltar para a página de vendas</button>
+    </div>
+
+    <script>
+        // Função para validar o ingresso
+        function validarIngresso() {
+            var codigoIngresso = document.getElementById('codigoIngresso').value;
+            var codigoValido = "ABC123456789";  // Aqui deve ser o código único gerado no momento da compra
+
+            // Se o código for válido
+            if (codigoIngresso === codigoValido) {
+                document.getElementById('sucesso').style.display = 'block'; // Exibe a mensagem de sucesso
+                document.getElementById('resultado').style.display = 'none'; // Esconde a mensagem de erro
+            } else {
+                document.getElementById('sucesso').style.display = 'none'; // Esconde a mensagem de sucesso
+                document.getElementById('resultado').style.display = 'block'; // Exibe a mensagem de erro
+            }
+        }
+
+        // Função para voltar para a página anterior (página de vendas)
+        function voltarPagina() {
+            window.history.back();  // Redireciona para a página anterior
+        }
+    </script>
+</body>
+</html>
