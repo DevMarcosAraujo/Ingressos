@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresso - Evento Incrível</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .ingresso {
+            background: #fff;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .ingresso h1 {
+            color: #333;
+        }
+        .ingresso p {
+            font-size: 16px;
+            color: #555;
+        }
+        .qr-code {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .codigo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="ingresso">
+        <h1>Ingresso para o Evento Incrível</h1>
+        <p><strong>Nome do Comprador:</strong> João Silva</p>
+        <p><strong>Tipo de Ingresso:</strong> VIP</p>
+        <p><strong>Data do Evento:</strong> 20 de Julho de 2025</p>
+        <p><strong>Local:</strong> Arena X</p>
+
+        <p class="codigo">Código do Ingresso: ABC123456789</p>
+
+        <!-- Div onde o QR Code será gerado -->
+        <div id="qrcode" class="qr-code"></div>
+
+        <p>Escaneie este QR Code para validar sua entrada no evento.</p>
+    </div>
+
+    <script>
+        // Gerar o QR Code com a URL do ingresso ou código único
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "https://meusite.com/ingresso/ABC123456789",  // URL ou código único do ingresso
+            width: 128,
+            height: 128
+        });
+    </script>
+</body>
+</html>

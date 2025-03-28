@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venda de Ingressos</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
     <header>
         <h1>Evento Incrível</h1>
         <p>Garanta seu ingresso agora!</p>
+        <a href="conferir-ingresso.html" class="botao-conferir">Conferir Ingresso</a>
+        <a href="login.html" class="botao-login">Login</a> <!-- Botão de Login -->
     </header>
     
     <section class="evento-info">
@@ -20,7 +23,7 @@
     
     <section class="ingresso">
         <h2>Compre seu Ingresso</h2>
-        <form id="compra-form">
+        <form id="compra-form" onsubmit="gerarQRCode(event)">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" required>
             
@@ -36,8 +39,12 @@
             <label for="data-nascimento">Data de Nascimento:</label>
             <input type="date" id="data-nascimento" required>
             
-            <option value="pista">Pista - R$50</option>
-    </select>
+            <label for="tipo-ingresso">Tipo de Ingresso:</label>
+            <select id="tipo-ingresso" required>
+                <option value="pista">Pista - R$50</option>
+                <option value="camarote">Camarote - R$150</option>
+                <option value="vip">VIP - R$200</option>
+            </select>
 
             <button type="submit">Gerar QR Code para Pagamento</button>
         </form>
