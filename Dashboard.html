@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Administrador</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Menu Lateral -->
+        <nav class="sidebar">
+            <h2>DASHBORD</h2>
+            <ul>
+                <li><a href="Visao-geral.html">📊 Visão Geral</a></li>
+                <li><a href="Ingressos.html">📜 Ingressos Vendidos</a></li>
+                <li><a href="Eventos.html">📅 Eventos</a></li>
+                <li><a href="Configuração.html">⚙ Configurações</a></li>
+            </ul>
+            <button onclick="logout()">🚪 Sair</button>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="content">
+            <h1>Ingressos Vendidos</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>WhatsApp</th>
+                        <th>CPF</th>
+                        <th>Email</th>
+                        <th>Ingresso</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaIngressos">
+                    <!-- Os ingressos serão carregados aqui pelo JavaScript -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

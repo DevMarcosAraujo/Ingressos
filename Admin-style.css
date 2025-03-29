@@ -1,0 +1,154 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    text-decoration: none;
+    color: rgb(14, 5, 5);
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: space-between;
+    flex-direction: row; /* Normalmente horizontal */
+}
+
+/* Layout principal */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row; /* Mantém horizontal para dispositivos grandes */
+}
+
+/* MENU LATERAL */
+.sidebar {
+    width: 250px;
+    background: #014911;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo dos itens do menu */
+.sidebar h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    font-size: 18px;
+    color: rgb(12, 12, 12);
+    padding: 12px;
+    margin: 10px 0;
+    background: #00f36d;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar ul li:hover {
+    background: #03cdff;
+    transform: scale(1.05);
+}
+
+/* Botão de logout */
+.sidebar button {
+    margin-top: auto;
+    padding: 12px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar button:hover {
+    background: lightgray;
+    transform: scale(1.05);
+}
+
+/* Conteúdo principal */
+.content {
+    flex: 1;
+    padding: 20px;
+    background: #f4f4f4;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+th {
+    background: #1d1c1c;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+tr:hover {
+    background: #ddd;
+}
+
+/* RESPONSIVIDADE PARA MOBILE */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* Coloca os elementos em uma coluna */
+    }
+
+    .sidebar {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 20px; /* Espaço para separar da tabela */
+    }
+
+    .sidebar ul li {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .content {
+        padding: 10px;
+        margin-top: 20px; /* Dá espaço entre o menu e a tabela */
+    }
+
+    table {
+        font-size: 14px;
+        margin-top: 20px; /* Espaço extra acima da tabela */
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    /* Ajuste do botão de logout */
+    .sidebar button {
+        margin-top: 20px;
+    }
+}
