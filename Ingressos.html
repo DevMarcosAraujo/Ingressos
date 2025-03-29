@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingresso - Evento Incrível</title>
+    <title>Ingressos - Evento Incrível</title>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <style>
         body {
@@ -12,9 +12,35 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100vh;
             background-color: #f4f4f4;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+        .header {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .back-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px auto;
+            display: block;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background-color: #2980b9;
         }
         .ingresso {
             background: #fff;
@@ -24,6 +50,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-bottom: 20px;
         }
         .ingresso h1 {
             color: #333;
@@ -42,16 +69,105 @@
             font-weight: bold;
             color: #28a745;
         }
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search-container input {
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+        .ingressos-lista {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .ingresso-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .ingresso-item:hover {
+            background: #f1f1f1;
+        }
+        #ingressoContainer {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+        #fecharBtn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #fecharBtn:hover {
+            background-color: #c0392b;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
-    <div class="ingresso">
+    <!-- Título do evento -->
+    <div class="header">
+        Evento Incrível - Ingressos Vendidos
+    </div>
+
+    <!-- Botão de Voltar -->
+    <a href="dashboard.html" class="back-btn">Voltar ao Dashboard</a>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Buscar por ID ou Nome" oninput="filtrarIngressos()">
+    </div>
+
+    <div id="ingressosLista" class="ingressos-lista">
+        <!-- Lista de ingressos será carregada aqui -->
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="ingressoContainer" class="ingresso">
+        <button id="fecharBtn" onclick="fecharIngresso()">×</button>
         <h1>Ingresso para o Evento Incrível</h1>
+        <!-- Informações do ingresso serão carregadas aqui -->
         <p><strong>Nome do Comprador:</strong> João Silva</p>
         <p><strong>Tipo de Ingresso:</strong> VIP</p>
         <p><strong>Data do Evento:</strong> 20 de Julho de 2025</p>
         <p><strong>Local:</strong> Arena X</p>
-
         <p class="codigo">Código do Ingresso: ABC123456789</p>
 
         <!-- Div onde o QR Code será gerado -->
@@ -61,12 +177,80 @@
     </div>
 
     <script>
-        // Gerar o QR Code com a URL do ingresso ou código único
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: "https://meusite.com/ingresso/ABC123456789",  // URL ou código único do ingresso
-            width: 128,
-            height: 128
-        });
+        // Dados simulados dos ingressos
+        const ingressos = [
+            { id: 1, nome: "João Silva", whatsapp: "(11) 99999-9999", cpf: "123.456.789-00", email: "joao@email.com", ingresso: "VIP", codigo: "ABC123456789" },
+            { id: 2, nome: "Maria Souza", whatsapp: "(21) 98888-8888", cpf: "987.654.321-00", email: "maria@email.com", ingresso: "Pista", codigo: "DEF987654321" },
+            { id: 3, nome: "Carlos Silva", whatsapp: "(31) 97777-7777", cpf: "111.222.333-44", email: "carlos@email.com", ingresso: "Camarote", codigo: "GHI456789012" }
+        ];
+
+        // Função para exibir todos os ingressos na lista
+        function exibirIngressos() {
+            const ingressosLista = document.getElementById('ingressosLista');
+            ingressosLista.innerHTML = '';
+
+            ingressos.forEach(ingresso => {
+                const ingressoItem = document.createElement('div');
+                ingressoItem.classList.add('ingresso-item');
+                ingressoItem.innerHTML = `
+                    <p><strong>ID:</strong> ${ingresso.id}</p>
+                    <p><strong>Nome:</strong> ${ingresso.nome}</p>
+                    <p><strong>Tipo:</strong> ${ingresso.ingresso}</p>
+                    <p><strong>Código:</strong> ${ingresso.codigo}</p>
+                `;
+                ingressoItem.onclick = () => exibirIngresso(ingresso);  // Ao clicar, exibe o ingresso completo
+                ingressosLista.appendChild(ingressoItem);
+            });
+        }
+
+        // Função para exibir o ingresso completo
+        function exibirIngresso(ingresso) {
+            const ingressoContainer = document.getElementById('ingressoContainer');
+            const overlay = document.getElementById('overlay');
+            ingressoContainer.style.display = 'block';
+            overlay.style.display = 'block';
+            ingressoContainer.innerHTML = `
+                <button id="fecharBtn" onclick="fecharIngresso()">×</button>
+                <h1>Ingresso para o Evento Incrível</h1>
+                <p><strong>Nome do Comprador:</strong> ${ingresso.nome}</p>
+                <p><strong>Tipo de Ingresso:</strong> ${ingresso.ingresso}</p>
+                <p><strong>Data do Evento:</strong> 20 de Julho de 2025</p>
+                <p><strong>Local:</strong> Arena X</p>
+                <p class="codigo">Código do Ingresso: ${ingresso.codigo}</p>
+                <div id="qrcode" class="qr-code"></div>
+                <p>Escaneie este QR Code para validar sua entrada no evento.</p>
+            `;
+            // Gerar o QR Code
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: `https://meusite.com/ingresso/${ingresso.codigo}`,
+                width: 128,
+                height: 128
+            });
+        }
+
+        // Função de filtro
+        function filtrarIngressos() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const ingressoEncontrado = ingressos.find(ingresso => 
+                ingresso.id.toString().includes(searchInput) || 
+                ingresso.nome.toLowerCase().includes(searchInput)
+            );
+
+            if (ingressoEncontrado) {
+                exibirIngresso(ingressoEncontrado);
+            } else {
+                exibirIngressos();
+            }
+        }
+
+        // Fechar o ingresso exibido
+        function fecharIngresso() {
+            document.getElementById('ingressoContainer').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Exibe os ingressos ao carregar a página
+        exibirIngressos();
     </script>
 </body>
 </html>

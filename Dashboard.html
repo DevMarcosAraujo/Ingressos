@@ -10,38 +10,55 @@
     <div class="dashboard-container">
         <!-- Menu Lateral -->
         <nav class="sidebar">
-            <h2>DASHBORD</h2>
+            <h2>DASHBOARD</h2>
             <ul>
                 <li><a href="Visao-geral.html">📊 Visão Geral</a></li>
                 <li><a href="Ingressos.html">📜 Ingressos Vendidos</a></li>
                 <li><a href="Eventos.html">📅 Eventos</a></li>
-                <li><a href="Configuração.html">⚙ Configurações</a></li>
+                <li><a href="Configuracao.html">⚙ Configurações</a></li>
             </ul>
             <button onclick="logout()">🚪 Sair</button>
         </nav>
 
         <!-- Conteúdo Principal -->
-        <main class="content">
-            <h1>Ingressos Vendidos</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>WhatsApp</th>
-                        <th>CPF</th>
-                        <th>Email</th>
-                        <th>Ingresso</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaIngressos">
-                    <!-- Os ingressos serão carregados aqui pelo JavaScript -->
-                </tbody>
-            </table>
-        </main>
+        <div class="main-content">
+            <section class="content-visao">
+                <h1>Visão Geral do Evento</h1>
+                <div class="visao-geral">
+                    <p><strong>Nome do Evento:</strong> Festa Open Bar</p>
+                    <p><strong>Data:</strong> 25/05/2025</p>
+                    <p><strong>Local:</strong> Arena São Paulo</p>
+                    <p><strong>Ingressos Disponíveis:</strong> 500</p>
+                    <p><strong>Ingressos Vendidos:</strong> 120</p>
+                </div>
+                <!-- Gráfico de ingressos vendidos -->
+                 <canvas id="ingressosChart"></canvas>
+            </section>
+
+            <section class="content">
+                <h1>Ingressos Vendidos</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>WhatsApp</th>
+                            <th>CPF</th>
+                            <th>Email</th>
+                            <th>Ingresso</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaIngressos">
+                        <!-- Os ingressos serão carregados aqui pelo JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="admin-script.js"></script>
+    
 </body>
 </html>

@@ -48,9 +48,34 @@ function logout() {
 // Carregar ingressos ao abrir a página
 document.addEventListener("DOMContentLoaded", carregarIngressos);
 
-// admin-script.js
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("O conteúdo foi carregado e o script está rodando!");
-    // Coloque aqui a lógica do seu script
-});
+// Configuração do gráfico reduzido
+document.addEventListener("DOMContentLoaded", function () {
+    const labels = ["Pista", "Camarote", "VIP", "Front Stage"];
+    const data = [5, 3, 2, 1]; // Quantidade de ingressos vendidos
 
+    const ctx = document.getElementById("ingressosChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Ingressos Vendidos",
+                data: data,
+                backgroundColor: ["#FF5733", "#33FF57", "#3357FF", "#FFD700"],
+                borderColor: ["#C70039", "#28A745", "#1E90FF", "#DAA520"],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: { beginAtZero: true }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+});
